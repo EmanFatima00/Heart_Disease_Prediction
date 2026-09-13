@@ -272,3 +272,16 @@ print(f"  Final Model  : {final_name}")
 print(f"  Accuracy     : {final_acc*100:.2f}%")
 print(f"  ROC-AUC      : {final_auc:.4f}")
 print("=" * 60)
+
+# ── Save metrics for app ──────────────────────────────────────
+import json
+metrics = {
+    "accuracy": round(final_acc * 100, 2),
+    "roc_auc":  round(final_auc, 4),
+    "samples":  920,
+    "models":   5,
+    "final_model": final_name,
+}
+with open(os.path.join(OUTPUT_DIR, "metrics.json"), "w") as f:
+    json.dump(metrics, f)
+print("✅ Metrics saved to outputs/metrics.json")

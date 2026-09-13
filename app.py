@@ -1,6 +1,6 @@
 """
 Heart Disease Prediction App
-Author: Eman Fatima | BS-AI @ PAF-IAST | ML Intern @ ProSensia
+Author: Eman Fatima | BS-AI @ PAF-IAST
 """
 
 import streamlit as st
@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import joblib
 import os
+import json
 
 # ── Paths ─────────────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -63,9 +64,13 @@ def load_model():
     model         = joblib.load(os.path.join(OUTPUT_DIR, "heart_disease_model.pkl"))
     scaler        = joblib.load(os.path.join(OUTPUT_DIR, "scaler.pkl"))
     feature_names = joblib.load(os.path.join(OUTPUT_DIR, "feature_names.pkl"))
-    return model, scaler, feature_names
+    metrics_path  = os.path.join(OUTPUT_DIR, "metrics.json")
+    metrics = json.load(open(metrics_path)) if os.path.exists(metrics_path) else {
+        "accuracy": 83.15, "roc_auc": 0.9179, "samples": 920, "models": 5
+    }
+    return model, scaler, feature_names, metrics
 
-model, scaler, feature_names = load_model()
+model, scaler, feature_names, metrics = load_model()
 
 # ── Header ────────────────────────────────────────────────────
 st.markdown("""
@@ -76,10 +81,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 c1, c2, c3, c4 = st.columns(4)
-with c1: st.markdown('<div class="metric-card"><h3>84.2%</h3><p>Accuracy</p></div>', unsafe_allow_html=True)
-with c2: st.markdown('<div class="metric-card"><h3>0.918</h3><p>ROC-AUC</p></div>', unsafe_allow_html=True)
-with c3: st.markdown('<div class="metric-card"><h3>920</h3><p>Training Samples</p></div>', unsafe_allow_html=True)
-with c4: st.markdown('<div class="metric-card"><h3>5</h3><p>Models Compared</p></div>', unsafe_allow_html=True)
+with c1: st.markdown(f'<div class="metric-card"><h3>{metrics["accuracy"]}%</h3><p>Accuracy</p></div>', unsafe_allow_html=True)
+with c2: st.markdown(f'<div class="metric-card"><h3>{metrics["roc_auc"]}</h3><p>ROC-AUC</p></div>', unsafe_allow_html=True)
+with c3: st.markdown(f'<div class="metric-card"><h3>{metrics["samples"]}</h3><p>Training Samples</p></div>', unsafe_allow_html=True)
+with c4: st.markdown(f'<div class="metric-card"><h3>{metrics["models"]}</h3><p>Models Compared</p></div>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
