@@ -1,7 +1,7 @@
 # ❤️ Heart Disease Prediction System
 
 > **AI-powered cardiovascular risk assessment using an advanced ML pipeline**
-> Built by Eman Fatima | BS-AI @ PAF-IAST
+> Built by Eman Fatima | BS-AI @ PAF-IAST | ML Intern @ ProSensia
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?style=flat-square&logo=python)
 ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.5-orange?style=flat-square&logo=scikit-learn)
@@ -12,7 +12,7 @@
 ---
 
 ## 🚀 Live Demo
-**[👉 Click here to try the live app](YOUR_STREAMLIT_URL_HERE)**
+**[👉 Click here to try the live app](https://heartdiseaseprediction-ej7aqcnde9am5mjgyndeww.streamlit.app/)**
 
 ---
 
